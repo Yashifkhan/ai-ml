@@ -1,6 +1,6 @@
 import pandas as pd
 
-df=pd.read_csv("raw_data.csv")    #load the data
+# df=pd.read_csv("raw_data.csv")    #load the data
 
 # if emp salary is grater then 60k then apply 20% tax else 10 %
 # df["tax"]=df["income"].apply([lambda x: "20%" if x>=60000 else "10"])
@@ -25,9 +25,18 @@ df=pd.read_csv("raw_data.csv")    #load the data
 
 # df=df[["name","age","country","gender","income","id"]]
 
-df=df.copy()
-new_column=[col for col in df.columns if col != "id"] + ["id"]
-df=df[new_column]
+# df=df.copy()
+# new_column=[col for col in df.columns if col != "id"] + ["id"]
+# df=df[new_column]
 
 
-print(df.head())
+# print(df.head())
+
+
+df=pd.read_csv("raw_data.csv")
+
+# df["age"].hist()
+# print(df.head())
+
+df.plot(kind="scatter",x="age",y="income")
+
