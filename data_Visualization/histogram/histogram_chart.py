@@ -58,18 +58,18 @@ import matplotlib.pyplot as plt
 
 
 # test for  the city data represented 
-days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+# days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
-cities = ["New York", "London", "Delhi", "Tokyo"]
+# cities = ["New York", "London", "Delhi", "Tokyo"]
 
-temperatures = [
-    [22, 23, 21, 24, 25],  # New York
-    [18, 19, 17, 20, 21],  # London
-    [30, 32, 31, 33, 34],  # Delhi
-    [25, 26, 24, 27, 28]   # Tokyo
-]
+# temperatures = [
+#     [22, 23, 21, 24, 25],  # New York
+#     [18, 19, 17, 20, 21],  # London
+#     [30, 32, 31, 33, 34],  # Delhi
+#     [25, 26, 24, 27, 28]   # Tokyo
+# ]
 
-fig,ax=plt.subplots(2,2)
+# fig,ax=plt.subplots(2,2)
 
 # without loop 
 # ax[0][0].plot(days,temperatures[0])
@@ -82,15 +82,15 @@ fig,ax=plt.subplots(2,2)
 # ax[1][1].set_title(cities[3])
 
 # with loop optimize sol
-city_no=0
-for i in range(2):
-    for j in range(2):
-        ax[i][j].plot(days,temperatures[city_no] ,marker="o")
-        ax[i][j].set_title(cities[city_no])
-        ax[i][j].grid(True)
-        city_no+=1
+# city_no=0
+# for i in range(2):
+#     for j in range(2):
+#         ax[i][j].plot(days,temperatures[city_no] ,marker="o")
+#         ax[i][j].set_title(cities[city_no])
+#         ax[i][j].grid(True)
+#         city_no+=1
 
-fig.suptitle("temperatures in  cities over the week")
+# fig.suptitle("temperatures in  cities over the week")
+# fig.tight_layout()
+# plt.show()
 
-fig.tight_layout()
-plt.show()
