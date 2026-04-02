@@ -1,0 +1,1 @@
+print("learn maths for ai")
