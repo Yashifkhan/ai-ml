@@ -33,9 +33,12 @@ modal.fit(X_train,y_train)
 y_perdict=modal.predict(X_test)
 
 # check the score of modal 
-r2=r2_score(y_test,y_perdict)
-print("result of modal is after traning : ",r2)
-# print(y_perdict)
+# r2=r2_score(y_test,y_perdict)
+# print("result of modal is after traning : ",r2)
+
+print("result of modal ",y_perdict[0])
+
+
 # print(y_test.head())
 # print(X_train.head())
 # print(data.head())
