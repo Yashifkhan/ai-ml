@@ -1,0 +1,1 @@
+print("how to train a modal on online and batch traning")
