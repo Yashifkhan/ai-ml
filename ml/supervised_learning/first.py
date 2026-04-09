@@ -37,6 +37,7 @@ y_perdict=modal.predict(X_test)
 # print("result of modal is after traning : ",r2)
 
 print("result of modal ",y_perdict[0])
+print("model is running wait for result")
 
 
 # print(y_test.head())
