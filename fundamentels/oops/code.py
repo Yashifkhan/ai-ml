@@ -54,6 +54,8 @@ class Ta(Teacher,Student):
         super().__init__(salary)   #call the constructor of teacher class
         super().__init__(cgpa)     #call the constructor of student class
     
+
+print("hii")
 ta1=Ta(50000,9.5)
 print("ta salary : ",ta1.salary)
 # print("ta cgpa : ",ta1.cgpa)
