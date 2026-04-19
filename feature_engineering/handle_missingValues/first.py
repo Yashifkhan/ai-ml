@@ -1,0 +1,1 @@
+print("day one of handle the missing value in data")
