@@ -1,0 +1,1 @@
+print("learn outliears in data handling and how to find and how to remove and fill it ")
