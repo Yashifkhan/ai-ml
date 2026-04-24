@@ -1,0 +1,1 @@
+print("learn about pca princple component of analysis")
