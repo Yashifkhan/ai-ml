@@ -16,5 +16,6 @@ accurecy = r2_score(y, y_pred)
 # New prediction
 predict_value = model.predict([[6]])
 
+
 print("accuracy of model:", accurecy)
 print("result of model:", predict_value)

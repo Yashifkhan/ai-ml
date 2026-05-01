@@ -1,0 +1,1 @@
+print("learn linear multy linear regression  ")

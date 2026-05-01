@@ -14,6 +14,7 @@ y=data["salary"]
 # split data 
 X_train,X_tast,y_train,y_tast=train_test_split( X,y,train_size=0.2)
 
+
 model=LinearRegression()
 model.fit(X_train,y_train)
 y_pred=model.predict(X_tast)
