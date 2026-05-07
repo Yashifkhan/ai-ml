@@ -1,0 +1,73 @@
+
+# statics have two part 
+# 1. Descriptive Statistics 
+# 2.Inferential Statistics
+
+
+# 1 Descriptive Statistics 
+# 1.1 mean ,avarge 
+# x = Observations
+# n = number of terms
+import numpy as np 
+# arr=[3,5,7,9]
+
+# manully 
+def cal_mean(arr):
+    count=0
+    len_items=0
+    for i in arr:
+        count+=i
+        len_items+=1
+    return count /len_items
+# print(cal_mean(arr))    
+
+# with nop 
+# mean=np.mean(arr)
+# print(mean)
+
+
+# ************ Measures of Central Tendency ************
+
+# 1.2 mode 
+# The most frequently occurring value in the dataset.
+# arr=[1,3,1,5,2,3,4,1,2,1]
+# import scipy.stats as stats
+
+# manully 
+# def count_freq(arr):
+#     new_dict={}
+#     for i in arr:
+#         new_dict[i]=new_dict.get(i,0)+1
+#         most_freq=max(new_dict.values())
+#         most_freq_key=max(new_dict,key=new_dict.get)
+#     return most_freq_key
+# print(count_freq(arr))
+
+# with statistics library 
+# mode=stats.mode(arr)
+# print(mode[0])
+
+
+# 1.3 median 
+# The median is the middle value in a sorted dataset 
+
+# manully 
+# arr=[1,2,3,4,5]
+# def count_median(arr):
+#     arr.sort()
+#     n=len(arr)
+#     if n %2 ==1:
+#         return arr[n // 2]
+#     else:
+#         return (arr[n //2-1] + arr[n//2])/2
+    
+# print(count_median(arr))
+
+# with numpy 
+# import numpy as np 
+# arr=[1,2,3,4,5,6]
+# median=np.median(arr)
+# print(median)
+
+
+#1.2.1 Measure of Variability
