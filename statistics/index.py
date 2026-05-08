@@ -71,3 +71,55 @@ def cal_mean(arr):
 
 
 #1.2.1 Measure of Variability
+
+# 1.2 learn Measure of Variability
+# 1.2.1 range 
+# largest value in data set - smallst value in data set 
+# arr=[1,2,3,4,5]
+# max_val=max(arr)
+# min_val=min(arr)
+# range_is=max_val-min_val
+# print(range_is)
+
+
+# 1.2.2 variance 
+# max value - in all value in data set ans sqrt /n 
+# arr=[2, 4, 6, 8]
+# def mean(arr):
+#     count=0
+#     for i in arr:
+#         count+=i
+#     return count/(len(arr))
+
+# mean_val=mean(arr)
+# new_arr=[]
+# for i in arr:
+#     new_arr.append((i-mean_val))
+    
+# new_list2=[]
+# for i in new_arr:
+#     new_list2.append(abs(i)**2)
+
+# variance=sum(new_list2)/len(arr)
+# print(variance)
+
+
+
+# libaray return sample varince 
+# import statistics
+
+# # sample data
+# arr = [2,4,6,8]
+# # variance
+# print("Var = ", (statistics.variance(arr)))
+
+
+# 1.2.3 Standard deviation  sqrt of varince 
+# import statistics
+# arr = [1, 2, 3, 4, 5]
+# print("Std = ", (statistics.stdev(arr)))
+
+# σ=Variance
+# Step 3: Take square root
+
+# sqrt(5) ==2.23
