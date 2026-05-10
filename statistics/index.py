@@ -123,3 +123,5 @@ def cal_mean(arr):
 # Step 3: Take square root
 
 # sqrt(5) ==2.23
+
+print("start lerninf from one vedio ")
