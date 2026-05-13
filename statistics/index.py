@@ -124,4 +124,6 @@ def cal_mean(arr):
 
 # sqrt(5) ==2.23
 
-print("start lerninf from one vedio ")
+# print("start lerninf from one vedio ")
+
+print("leatning the random var and probaility distrutbition")
