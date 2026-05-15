@@ -126,4 +126,7 @@ def cal_mean(arr):
 
 # print("start lerninf from one vedio ")
 
-print("leatning the random var and probaility distrutbition")
+# print("leatning the random var and probaility distrutbition")
+
+# learn the varines and stand deviantion 
+# and learn data skewness and how to fit it 
