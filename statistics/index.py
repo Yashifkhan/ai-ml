@@ -130,3 +130,8 @@ def cal_mean(arr):
 
 # learn the varines and stand deviantion 
 # and learn data skewness and how to fit it 
+
+
+
+
+# basics complete learn of statics ,now try on data and prectice it 
