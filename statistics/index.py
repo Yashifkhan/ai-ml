@@ -135,3 +135,64 @@ def cal_mean(arr):
 
 
 # basics complete learn of statics ,now try on data and prectice it 
+
+# learn statistics with scikit learn  
+
+# import pandas as pd
+# import numpy as np
+
+# # load  the data 
+# data = pd.DataFrame({
+#     "area": [1200, 1500, 800, 1800, 2000, np.nan, 1100, 1400, 1750, 1600],
+#     "bedrooms": [2, 3, 2, 4, 4, 3, np.nan, 3, 4, 3],
+#     "age": [10, 5, 20, 8, np.nan, 12, 25, 7, 6, 15],
+#     "distance_to_metro": [2.5, 1.0, 5.0, 1.5, 0.8, 2.0, 4.5, np.nan, 1.2, 1.8],
+#     "city": ["Delhi", "Delhi", "Gurgaon", "Delhi", "Gurgaon", "Noida", "Noida", "Delhi", np.nan, "Gurgaon"],
+#     "price": [55, 72, 40, 88, 95, 60, 50, 68, 82, 75]
+# })
+
+# # print(data)
+
+# sum_null_vale=data.isnull().sum()
+
+# print(sum_null_vale)
+
+# desc_data=data.describe(include="all")
+# print(desc_data)
+
+# phase 2 
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer, KNNImputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score
+
+# load  the data 
+data = pd.DataFrame({
+    "area": [1200, 1500, 800, 1800, 2000, np.nan, 1100, 1400, 1750, 1600],
+    "bedrooms": [2, 3, 2, 4, 4, 3, np.nan, 3, 4, 3],
+    "age": [10, 5, 20, 8, np.nan, 12, 25, 7, 6, 15],
+    "distance_to_metro": [2.5, 1.0, 5.0, 1.5, 0.8, 2.0, 4.5, np.nan, 1.2, 1.8],
+    "city": ["Delhi", "Delhi", "Gurgaon", "Delhi", "Gurgaon", "Noida", "Noida", "Delhi", np.nan, "Gurgaon"],
+    "price": [55, 72, 40, 88, 95, 60, 50, 68, 82, 75]
+})
+
+
+X=data.drop("price",axis=1)
+y=data["price"]
+
+# divide the data in cat. and num. 
+num_features=X.select_dtypes(include=['int64','float64']).columns.tolist()
+cat_features=X.select_dtypes(include=['object']).columns.tolist()
+# print(X[cat_features])
+# print(X[num_features])
+
+
+numeric_transformer = Pipeline(steps=[
+    ("imputer", SimpleImputer(strategy="median")),
+    ("scaler", StandardScaler())
+])
