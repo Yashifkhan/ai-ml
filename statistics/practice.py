@@ -104,11 +104,11 @@ data = pd.DataFrame({
 # plt.bar(data['price'])
 # plt.show()
 
-import seaborn as sns 
-import matplotlib.pyplot as plt
+# import seaborn as sns 
+# import matplotlib.pyplot as plt
 
-sns.heatmap(data.corr(numeric_only=True), annot=True)
-plt.show()
+# sns.heatmap(data.corr(numeric_only=True), annot=True)
+# plt.show()
 
 # sns.histplot(data['price'],kde=True)
 # plt.show()
