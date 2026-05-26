@@ -36,6 +36,7 @@ df=pd.read_csv("house_price_regression_learning.csv")
 # outlier_condition = abs_z_scores > z_threshold
 # outliers_detected = df_clean[outlier_condition]
 
+
 # print("z-score result ")
 # print("outliers in data ",outliers_detected)
 # print("total outlires : ",len(outliers_detected))
