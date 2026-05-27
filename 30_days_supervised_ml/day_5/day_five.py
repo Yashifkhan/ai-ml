@@ -12,7 +12,18 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 df=pd.read_csv("house_price_regression_learning.csv")
 
-# df["area_sqft"].fillna(df["area_sqft"].median(),inplace=True)
+
+# Skewed data → use median
+# Normal data → use mean
+
+transformed_area_sqft   , lam = stats.boxcox(df["area_sqft"])
+_,p_transformed_are_sqft=stats.shapiro(transformed_area_sqft)
+print(p_transformed_are_sqft)
+
+# df["area_sqft"].fillna(df["area_sqft"].mean(),inplace=True)
+print(df.head())
+print(df.isnull().sum())
+
 # df["bedrooms"].fillna(df["bedrooms"].median(),inplace=True)
 # df["location_score"].fillna(df["location_score"].median(),inplace=True)
 # df["house_age_years"].fillna(df["house_age_years"].median(),inplace=True)
@@ -50,29 +61,29 @@ df=pd.read_csv("house_price_regression_learning.csv")
 # stats.boxcox  It returns two things: 
 #   1. 'transformed_price': The new, normally distributed values.
 #   2. 'lam': The optimal lambda power exponent it used for the math.
-transformed_price, lam = stats.boxcox(df["price"])
-_,p_transformed=stats.shapiro(transformed_price)
+# transformed_price, lam = stats.boxcox(df["price"])
+# _,p_transformed=stats.shapiro(transformed_price)
 
-z_scores=stats.zscore(transformed_price)
-threshold = 3
-outliers = transformed_price[np.abs(z_scores) > threshold]
-outlier_index = np.where(np.abs(z_scores) > 3)
-original_outliers = df["price"].iloc[outlier_index]
+# z_scores=stats.zscore(transformed_price)
+# threshold = 3
+# outliers = transformed_price[np.abs(z_scores) > threshold]
+# outlier_index = np.where(np.abs(z_scores) > 3)
+# original_outliers = df["price"].iloc[outlier_index]
 
 
-clean_data  = transformed_price[abs(z_scores) <= threshold]
-mask = np.abs(z_scores) <= threshold
-clean_df = df[mask]
+# clean_data  = transformed_price[abs(z_scores) <= threshold]
+# mask = np.abs(z_scores) <= threshold
+# clean_df = df[mask]
 
 # draw plot  with real data and not remove the outlirs 
-sns.scatterplot(x=df["area_sqft"],y=df["price"])
-plt.show()
+# sns.scatterplot(x=df["area_sqft"],y=df["price"])
+# plt.show()
 
 #draw plot with clean data and rempve the outlirs .
 # sns.scatterplot(x=clean_df["area_sqft"],y=clean_df["price"])
 # plt.show()
-print("Outliers in original data:", original_outliers)
-print("p_transpor value is ",p_transformed)
+# print("Outliers in original data:", original_outliers)
+# print("p_transpor value is ",p_transformed)
 # after the apply stats.boxcox and check the p value is ok then apply z-score else not
        #************ DATA NOT NORMAL DISTRUBUTE THEN USE IT *********
 
@@ -82,8 +93,57 @@ print("p_transpor value is ",p_transformed)
 
 
 
-        #***************** DATA NOT NORMAL DISTRUBUTE THEN YOU USE DIRECT IQR METHOD ***************
+        #***************** DATA NOT NORMAL DISTRUBUTE THEN YOU USE DIRECT IQR METHOD AND REMOVE THE OUTLIRES ***************
         
+# print(df.head())
+
+# plot the data and show easly outlirs 
+# sns.scatterplot(x=df["area_sqft"],y=df["price"])
+# plt.title("origan data")
+# plt.show()
+
+# select the targate column
+# data=df["price"]
+
+# Q1=data.quantile(0.25)
+# Q3=data.quantile(0.75)
+# IQR=Q3 - Q1
+
+# print("Q1:", Q1)
+# print("Q3:", Q3)
+# print("IQR:", IQR)
+        
+# find the rane b/w 
+
+# example 
+# Q1 = 100
+# Q3 = 200
+# IQR = 100
+# lower_bound = 100 - 1.5*100 = -50
+# upper_bound = 200 + 1.5*100 = 350 
+# Valid data range = -50 to 350
+
+# lower_range=Q1 - 1.5 * IQR
+# upper_range=Q3 + 1.5 * IQR
+
+# use this range value , this is min and max value ,another value is outlirs ,so use b/w value in range only 
+# clean_df=df[(df["price"] >= lower_range) & (df["price"] <=upper_range)]
+# print("clean_df",clean_df)
+
+# sns.scatterplot(x=clean_df["area_sqft"],y=clean_df["price"])
+# plt.title("clean data")
+# plt.show()
+
+
+# show the both org data and clean data 
+# sns.scatterplot(x=df["area_sqft"], y=df["price"], color="red", label="Original")
+# sns.scatterplot(x=clean_df["area_sqft"], y=clean_df["price"], label="Clean")
+# plt.legend()
+# plt.show()
+        
+# after the clean data train model 
+
+# print(clean_df.isnull().sum())
         
         #***************** DATA NOT NORMAL DISTRUBUTE THEN YOU USE DIRECT IQR METHOD ***************
         
