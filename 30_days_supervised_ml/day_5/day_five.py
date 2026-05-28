@@ -10,21 +10,103 @@ import numpy as np
 import scipy.stats as stats
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 df=pd.read_csv("house_price_regression_learning.csv")
 
 
+# fix invalid
+df.loc[df["house_age_years"] <= 0, "house_age_years"] = None
+df.loc[df["area_sqft"] <= 0, "area_sqft"] = np.nan
+
+
+# Handle Missing & Invalid
+
+# fill missing
+# df["area_sqft"].fillna(df["area_sqft"].median(), inplace=True)
+# df["bedrooms"].fillna(df["bedrooms"].median(), inplace=True)
+# df["location_score"].fillna(df["location_score"].median(), inplace=True)
+# df["house_age_years"].fillna(df["house_age_years"].median(), inplace=True)
+df["area_sqft"] = df["area_sqft"].fillna(df["area_sqft"].median())
+df["bedrooms"] = df["bedrooms"].fillna(df["bedrooms"].median())
+df["location_score"] = df["location_score"].fillna(df["location_score"].median())
+df["house_age_years"] = df["house_age_years"].fillna(df["house_age_years"].median())
+
+
+# Apply Transformation
+df["area_sqft"], area_lambda = stats.boxcox(df["area_sqft"])
+df["living_space_index"], lsi_lambda = stats.boxcox(df["living_space_index"])
+
+
+# Feature Scaling
+
+
+X = df.drop("price", axis=1)
+y = df["price"]
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# y_pred = model.predict(X_test)
+
+new_house = pd.DataFrame([{
+    "area_sqft": 2000,
+    "bedrooms": 3,
+    "living_space_index": 180,
+    "location_score": 7.5,
+    "house_age_years": 10
+}])
+
+new_house["area_sqft"] = stats.boxcox(new_house["area_sqft"], lmbda=area_lambda)
+new_house["living_space_index"] = stats.boxcox(new_house["living_space_index"], lmbda=lsi_lambda)
+
+new_house_scaled = scaler.transform(new_house)
+predicted_price = model.predict(new_house_scaled)
+print("Predicted Price:", predicted_price[0])
+
 # Skewed data → use median
-# Normal data → use mean
+# Normal data → use mean and no outlirs
 
-transformed_area_sqft   , lam = stats.boxcox(df["area_sqft"])
-_,p_transformed_are_sqft=stats.shapiro(transformed_area_sqft)
-print(p_transformed_are_sqft)
+# temporary fill the value once 
+# temp_area = df["area_sqft"].copy()
+# temp_area = temp_area.fillna(temp_area.median())
 
-# df["area_sqft"].fillna(df["area_sqft"].mean(),inplace=True)
-print(df.head())
-print(df.isnull().sum())
+# temp_location=df["location_score"].copy()
+# temp_location=temp_location.fillna(temp_location.median())
 
+# remove the nagitive value and fill 
+# df.loc[df["house_age_years"] <= 0, "house_age_years"] = None
+# temp_house_age=df["house_age_years"]
+# temp_house_age=temp_house_age.fillna(temp_house_age.median())
+
+
+# transformed_area, lam = stats.boxcox(temp_area)
+# _, p = stats.shapiro(transformed_area)
+
+# transform_location_score,lam=stats.boxcox(temp_location)
+# _,p_location_score=stats.shapiro(transform_location_score)
+
+# transporm_hosue_age,lam=stats.boxcox(temp_house_age)
+# _,p_house_age=stats.shapiro(transporm_hosue_age)
+
+# print("p hosue value",p_house_age)
+# orignal work 
+# df["area_sqft"].fillna(df["area_sqft"].median(), inplace=True)
 # df["bedrooms"].fillna(df["bedrooms"].median(),inplace=True)
+# df["location_score"].fillna(df["location_score"].median(),inplace=True)
+# df["house_age_years"].fillna(df["house_age_years"].median(),inplace=True)
+
+# print(df.head())
+# print(df.isnull().sum())
+
 # df["location_score"].fillna(df["location_score"].median(),inplace=True)
 # df["house_age_years"].fillna(df["house_age_years"].median(),inplace=True)
 
