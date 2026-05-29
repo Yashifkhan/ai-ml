@@ -40,8 +40,6 @@ df["living_space_index"], lsi_lambda = stats.boxcox(df["living_space_index"])
 
 
 # Feature Scaling
-
-
 X = df.drop("price", axis=1)
 y = df["price"]
 
