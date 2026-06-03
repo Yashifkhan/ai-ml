@@ -27,7 +27,8 @@ y_predict_probability=model.predict_proba(hours)
 
 
 threshold = 0.5 
-prob = y_predict_binary[0]
+# prob = y_predict_binary[0]
+prob = y_predict_probability[0][1]
 
 if prob >= threshold:
     print("Pass the prob. of :" ,prob)

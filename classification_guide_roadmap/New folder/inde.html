@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML Classification Cheat Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0F4FF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 32px 16px;
+  }
+
+  .card {
+    width: 900px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 60%, #0C3660 100%);
+    padding: 36px 40px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 40%;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.12);
+    color: #93C5FD;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(147,197,253,0.25);
+  }
+  .header-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .header-title span { color: #60A5FA; }
+  .header-sub {
+    font-size: 14px;
+    color: #93C5FD;
+    margin-top: 6px;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+  .pills {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .pill-blue  { background: rgba(37,99,235,0.25); color: #93C5FD; border: 1px solid rgba(59,130,246,0.35); }
+  .pill-green { background: rgba(16,185,129,0.2); color: #6EE7B7; border: 1px solid rgba(16,185,129,0.3); }
+  .pill-amber { background: rgba(245,158,11,0.2); color: #FCD34D; border: 1px solid rgba(245,158,11,0.3); }
+
+  /* ── BODY ── */
+  .body { padding: 28px 40px 32px; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 24px; }
+  .section:last-of-type { margin-bottom: 0; }
+
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .sec-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .sec-label {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .sec-desc {
+    font-size: 11.5px;
+    font-weight: 400;
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  /* Blue section */
+  .s-blue .sec-num  { background: #DBEAFE; color: #1D4ED8; }
+  .s-blue .sec-label{ color: #1E40AF; }
+  .s-blue .sec-desc { background: #EFF6FF; color: #3B82F6; border: 1px solid #BFDBFE; }
+  .s-blue table th  { background: #EFF6FF; color: #1D4ED8; }
+  .s-blue .tag-best { background: #DBEAFE; color: #1E40AF; }
+  .s-blue .tag-fast { background: #EDE9FE; color: #5B21B6; }
+  .s-blue tr:hover td { background: #F5F8FF; }
+
+  /* Green section */
+  .s-green .sec-num  { background: #D1FAE5; color: #065F46; }
+  .s-green .sec-label{ color: #065F46; }
+  .s-green .sec-desc { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
+  .s-green table th  { background: #ECFDF5; color: #065F46; }
+  .s-green .tag-best { background: #D1FAE5; color: #065F46; }
+  .s-green .tag-fast { background: #D1FAE5; color: #065F46; }
+  .s-green tr:hover td { background: #F5FDF9; }
+
+  /* Amber section */
+  .s-amber .sec-num  { background: #FEF3C7; color: #92400E; }
+  .s-amber .sec-label{ color: #92400E; }
+  .s-amber .sec-desc { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+  .s-amber table th  { background: #FFFBEB; color: #92400E; }
+  .s-amber .tag-best { background: #FEF3C7; color: #92400E; }
+  .s-amber .tag-adv  { background: #FCE7F3; color: #9D174D; }
+  .s-amber tr:hover td { background: #FDFAF0; }
+
+  /* ── TABLE ── */
+  .tbl-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th {
+    padding: 9px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 9px 14px;
+    border-top: 1px solid #F3F4F6;
+    vertical-align: middle;
+    color: #374151;
+    line-height: 1.5;
+    transition: background 0.15s;
+  }
+  tr:last-child td { border-bottom: none; }
+  .algo {
+    font-weight: 600;
+    color: #111827;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .tags { display: inline-flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .when { color: #4B5563; font-size: 12px; }
+  .example { color: #6B7280; font-size: 12px; font-style: italic; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #F8FAFC;
+    border-top: 1px solid #E5E7EB;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .rule-box {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .rule-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .rule-text { color: #374151; }
+  .rule-text strong { color: #111827; }
+  .hashtags {
+    font-size: 11px;
+    color: #6B7280;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .hashtags span { color: #3B82F6; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <span class="badge">Machine Learning</span>
+    </div>
+    <div class="header-title">ML Classification <span>Algorithm</span> Cheat Sheet</div>
+    <div class="header-sub">Know exactly which algorithm to pick — and why</div>
+    <div class="pills">
+      <span class="pill pill-blue">① Binary Classification</span>
+      <span class="pill pill-green">② Multiclass Classification</span>
+      <span class="pill pill-amber">③ Multilabel Classification</span>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SECTION 1: BINARY -->
+    <div class="section s-blue">
+      <div class="sec-head">
+        <div class="sec-num">01</div>
+        <div class="sec-label">Binary Classification</div>
+        <div class="sec-desc">Output: 2 classes &nbsp;·&nbsp; Yes / No &nbsp;·&nbsp; 0 / 1</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:26%">Algorithm</th>
+              <th style="width:38%">When to Use</th>
+              <th>Real Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><div class="tags"><span class="algo">Logistic Regression</span></div></td><td class="when">Simple, linear data</td><td class="example">Pass / Fail (hours studied)</td></tr>
+            <tr><td><div class="tags"><span class="algo">KNN</span></div></td><td class="when">Small dataset, pattern-based</td><td class="example">Customer buys or not</td></tr>
+            <tr><td><div class="tags"><span class="algo">Decision Tree</span></div></td><td class="when">Rule-based, easy to explain</td><td class="example">Loan approval rules</td></tr>
+            <tr><td><div class="tags"><span class="algo">Random Forest</span></div></td><td class="when">Better accuracy, less overfitting</td><td class="example">Fraud detection</td></tr>
+            <tr><td><div class="tags"><span class="algo">SVM</span></div></td><td class="when">High-dimensional data</td><td class="example">Spam detection</td></tr>
+            <tr><td><div class="tags"><span class="algo">Naive Bayes</span></div></td><td class="when">Text data</td><td class="example">Email spam classification</td></tr>
+            <tr><td><div class="tags"><span class="algo">Gradient Boosting</span></div></td><td class="when">Complex patterns, high accuracy</td><td class="example">Customer churn</td></tr>
+            <tr><td><div class="tags"><span class="algo">XGBoost</span><span class="tag tag-best">⚡ Best</span></div></td><td class="when">High accuracy + regularization</td><td class="example">Credit risk prediction</td></tr>
+            <tr><td><div class="tags"><span class="algo">LightGBM</span><span class="tag tag-fast">🚀 Fast</span></div></td><td class="when">Large data, fast training</td><td class="example">Ad click prediction</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 2: MULTICLASS -->
+    <div class="section s-green">
+      <div class="sec-head">
+        <div class="sec-num">02</div>
+        <div class="sec-label">Multiclass Classification</div>
+        <div class="sec-desc">Output: 3+ classes &nbsp;·&nbsp; A / B / C &nbsp;·&nbsp; Cat / Dog / Bird</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:26%">Algorithm</th>
+              <th style="width:38%">When to Use</th>
+              <th>Real Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><div class="tags"><span class="algo">Logistic Reg. (OVR)</span></div></td><td class="when">Basic multiclass problems</td><td class="example">Grade (A / B / C)</td></tr>
+            <tr><td><div class="tags"><span class="algo">Decision Tree</span></div></td><td class="when">Easy interpretation</td><td class="example">Animal classification</td></tr>
+            <tr><td><div class="tags"><span class="algo">Random Forest</span></div></td><td class="when">High accuracy</td><td class="example">Product category</td></tr>
+            <tr><td><div class="tags"><span class="algo">KNN</span></div></td><td class="when">Small dataset</td><td class="example">Digit recognition (0–9)</td></tr>
+            <tr><td><div class="tags"><span class="algo">Naive Bayes</span></div></td><td class="when">Text classification</td><td class="example">News category</td></tr>
+            <tr><td><div class="tags"><span class="algo">SVM</span></div></td><td class="when">Complex, small data</td><td class="example">Image classification (limited data)</td></tr>
+            <tr><td><div class="tags"><span class="algo">Gradient Boosting</span></div></td><td class="when">Strong performance</td><td class="example">Customer segmentation</td></tr>
+            <tr><td><div class="tags"><span class="algo">XGBoost</span><span class="tag tag-best">⚡ Best</span></div></td><td class="when">Best overall performance</td><td class="example">Multi-class business data</td></tr>
+            <tr><td><div class="tags"><span class="algo">LightGBM</span><span class="tag tag-fast">🚀 Fast</span></div></td><td class="when">Large multiclass datasets</td><td class="example">Large-scale classification</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 3: MULTILABEL -->
+    <div class="section s-amber">
+      <div class="sec-head">
+        <div class="sec-num">03</div>
+        <div class="sec-label">Multilabel Classification</div>
+        <div class="sec-desc">Output: multiple labels at once &nbsp;·&nbsp; Action + Comedy + Drama</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:30%">Algorithm</th>
+              <th style="width:34%">When to Use</th>
+              <th>Real Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><div class="tags"><span class="algo">Logistic Reg. (Binary Rel.)</span></div></td><td class="when">Simple multilabel</td><td class="example">Movie tags (Action + Comedy)</td></tr>
+            <tr><td><div class="tags"><span class="algo">KNN (ML-KNN)</span></div></td><td class="when">Pattern-based tagging</td><td class="example">Image tagging</td></tr>
+            <tr><td><div class="tags"><span class="algo">Decision Tree / RF</span></div></td><td class="when">Structured data</td><td class="example">Disease prediction (multiple)</td></tr>
+            <tr><td><div class="tags"><span class="algo">Gradient Boosting</span></div></td><td class="when">High accuracy multilabel</td><td class="example">Product tagging</td></tr>
+            <tr><td><div class="tags"><span class="algo">XGBoost (wrapper)</span><span class="tag tag-best">⚡ Best</span></div></td><td class="when">Strong multilabel performance</td><td class="example">Multi-tag classification</td></tr>
+            <tr><td><div class="tags"><span class="algo">LightGBM (wrapper)</span><span class="tag tag-fast">🚀 Fast</span></div></td><td class="when">Large multilabel data</td><td class="example">Large-scale tagging system</td></tr>
+            <tr><td><div class="tags"><span class="algo">Neural Networks</span><span class="tag tag-adv">🧠 Advanced</span></div></td><td class="when">Complex data, multiple objects</td><td class="example">Image with multiple objects</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="rule-box">
+      <div class="rule">
+        <div class="rule-dot" style="background:#3B82F6"></div>
+        <div class="rule-text"><strong>Binary</strong> → 2 outputs (Yes/No)</div>
+      </div>
+      <div class="rule">
+        <div class="rule-dot" style="background:#10B981"></div>
+        <div class="rule-text"><strong>Multiclass</strong> → 1 of many</div>
+      </div>
+      <div class="rule">
+        <div class="rule-dot" style="background:#F59E0B"></div>
+        <div class="rule-text"><strong>Multilabel</strong> → many at once</div>
+      </div>
+    </div>
+    <div class="hashtags">
+      <span>#MachineLearning</span>
+      <span>#DataScience</span>
+      <span>#Python</span>
+      <span>#AI</span>
+      <span>#Classification</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

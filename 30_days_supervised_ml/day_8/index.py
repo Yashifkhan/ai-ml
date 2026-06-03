@@ -10,5 +10,5 @@
 
 # sigmoid active  funtion formula 
  
- 
+
 #  best fit line create with the help of cost function 
