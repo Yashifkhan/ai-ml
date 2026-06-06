@@ -1,0 +1,16 @@
+name,food_type,latitude,longitude,address,rating,price
+Dominos,Pizza,28.7041,77.1025,Connaught Place,4.2,250
+PizzaHut,Pizza,28.7050,77.1030,Connaught Place,4.0,230
+LocalPizza,Pizza,28.7030,77.1010,Connaught Place,3.8,200
+BurgerKing,Burger,28.7060,77.1040,Karol Bagh,4.3,180
+McDonalds,Burger,28.7070,77.1050,Karol Bagh,4.1,170
+LocalBurger,Burger,28.7020,77.1000,Karol Bagh,3.7,150
+WowMomos,Noodles,28.7080,77.1060,Rajouri Garden,4.4,160
+ChineseWok,Noodles,28.7090,77.1070,Rajouri Garden,4.2,150
+LocalNoodles,Noodles,28.7010,77.0990,Rajouri Garden,3.6,120
+CafeCoffeeDay,Coffee,28.7100,77.1080,Saket,4.5,140
+LocalCafe,Coffee,28.7000,77.0980,Saket,3.9,100
+Starbucks,Coffee,28.7110,77.1090,Saket,4.6,180
+StreetFood,Pizza,28.6990,77.0970,Laxmi Nagar,3.5,120
+FoodTruck,Burger,28.6980,77.0960,Laxmi Nagar,3.6,130
+QuickBites,Noodles,28.6970,77.0950,Laxmi Nagar,3.7,110
