@@ -49,6 +49,7 @@ def evaluate(y_test, y_pred, model_name):
     print("Recall:", recall_score(y_test, y_pred))
     print("F1 Score:", f1_score(y_test, y_pred))
     
+    
 evaluate(y_test, y_predict_lr, "Logistic Regression")
 evaluate(y_test, y_predict_knn, "KNN")
 evaluate(y_test, y_predict_dt, "Decision Tree")

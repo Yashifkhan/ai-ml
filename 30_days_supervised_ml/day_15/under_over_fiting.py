@@ -15,6 +15,7 @@
 
 
 # Student Example
+
 # Type	Behavior
 # Underfitting	Student didn’t study → fails everywhere
 # Good Fit	Student understands concepts

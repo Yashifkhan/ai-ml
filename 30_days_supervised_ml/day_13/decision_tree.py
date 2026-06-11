@@ -96,6 +96,8 @@ sample2 = [[
     0
 ]]
 
+
+
 print(model.predict(sample))
 # print(model.predict(sample2))
 # print(df.columns.tolist())
