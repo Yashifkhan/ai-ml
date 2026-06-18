@@ -2,7 +2,12 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report 
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report ,precision_score,recall_score,f1_score
 
 required_features=[
 "gender",
@@ -52,11 +57,6 @@ df=pd.get_dummies(df,columns=multi_columns,drop_first=True)
 df["MultipleLines"] = df["MultipleLines"].replace("No phone service", "No")
 df["MultipleLines"] = df["MultipleLines"].map({"No":0, "Yes":1})
 
-# print(df.head())
-# print(df.tail(10))
-# print(df.columns.tolist())
-
-
 # alter nativve of this select data type 
 # print the spacific column value 
 rest_column=["OnlineSecurity","OnlineBackup","DeviceProtection","TechSupport","StreamingTV","StreamingMovies","TotalCharges"]
@@ -76,21 +76,9 @@ df["TotalCharges"].fillna(df["TotalCharges"].median(), inplace=True)
 bool_cols = df.select_dtypes(include="bool").columns
 df[bool_cols] = df[bool_cols].astype(int)
 
-# df.info()
-# print("value count of chrun",df['Churn'].value_counts())
-
-# print(df.head())
-# print(df[rest_column])
-
-
-# Feature Scaling
-
-scaler = StandardScaler()
-
-df[['MonthlyCharges','TotalCharges','tenure']] = scaler.fit_transform(
-    df[['MonthlyCharges','TotalCharges','tenure']]
-)
-
+# df[['MonthlyCharges','TotalCharges','tenure']] = scaler.fit_transform(
+#     df[['MonthlyCharges','TotalCharges','tenure']]
+# )
 
 # Feature Engineering   
 df['AvgChargePerMonth'] = df['TotalCharges'] / (df['tenure'] + 1)
@@ -103,44 +91,69 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-model = LogisticRegression()
-model.fit(X_train, y_train)
 
-model = LogisticRegression()
-model.fit(X_train, y_train)
+# print(df.head())
+# print(df.info())
 
-sample_no_churn = [[
-0,  # gender (Female)
-0,  # SeniorCitizen
-1,  # Partner
-1,  # Dependents
-48, # tenure (high → stable customer)
-1,  # PhoneService
-1,  # MultipleLines
-1,  # OnlineSecurity
-1,  # OnlineBackup
-1,  # DeviceProtection
-1,  # TechSupport
-1,  # StreamingTV
-1,  # StreamingMovies
-0,  # PaperlessBilling (less risky)
-55.0,   # MonthlyCharges (moderate)
-3000.0, # TotalCharges (high lifetime value)
+# train the model step by step 
+# Feature Scaling scal the data high range to low 
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-1,0,   # Contract (One year)
-1,0,0, # PaymentMethod (Credit card automatic)
-0,0 ,   # InternetService (DSL assumed)
-0
-]]
+def evaluate_model(model, X_test, y_test):
+    y_pred = model.predict(X_test)
 
-y_pred = model.predict(X_test)
-y_predict=model.predict(sample_no_churn)
-print("model predict value : ",y_predict[0])
-print("Accuracy:", accuracy_score(y_test, y_pred))
+    print("Sample y_pred:", y_pred[:5])
+    print("Type:", y_pred.dtype)
 
-print("model predict value : ",y_predict[0])
-print("Accuracy:", accuracy_score(y_test, y_pred))
+    import numpy as np
+    if not np.array_equal(y_pred, y_pred.astype(int)):
+        print("⚠️ Converting continuous to binary")
+        y_pred = (y_pred > 0.5).astype(int)
 
+    acc = accuracy_score(y_test, y_pred)
+    pre = precision_score(y_test, y_pred)
+    rec = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
 
-# print(confusion_matrix(y_test, y_pred))
-# print(classification_report(y_test, y_pred))
+    return acc, pre, rec, f1
+# store all model 
+results = []
+# 1 model Logistic Regression 
+lr=LogisticRegression()
+lr.fit(X_train_scaled,y_train)
+acc, pre, rec, f1 = evaluate_model(lr, X_test_scaled, y_test)
+results.append(["Logistic Regression", acc, pre, rec, f1])
+# 2. KNN 
+knn=KNeighborsClassifier()
+knn.fit(X_train_scaled,y_train)
+acc, pre, rec, f1 = evaluate_model(knn, X_test_scaled, y_test)
+results.append(["KNN", acc, pre, rec, f1])
+# 3. Decision Tree
+dt=DecisionTreeRegressor()
+dt.fit(X_train,y_train)
+acc, pre, rec, f1 = evaluate_model(dt, X_test, y_test)
+results.append(["Decision Tree", acc, pre, rec, f1])
+# 4. Random Forest
+rf = RandomForestClassifier()
+rf.fit(X_train, y_train)
+acc, pre, rec, f1 = evaluate_model(rf, X_test, y_test)
+results.append(["Random Forest", acc, pre, rec, f1])
+# 5. SVM
+svm = SVC()
+svm.fit(X_train_scaled, y_train)
+acc, pre, rec, f1 = evaluate_model(svm, X_test_scaled, y_test)
+results.append(["SVM", acc, pre, rec, f1])
+# 6. Gradient Boosting
+gb = GradientBoostingClassifier()
+gb.fit(X_train, y_train)
+acc, pre, rec, f1 = evaluate_model(gb, X_test, y_test)
+results.append(["Gradient Boosting", acc, pre, rec, f1])
+
+# print(results)
+results_df = pd.DataFrame(results, columns=[
+    "Model", "Accuracy", "Precision", "Recall", "F1 Score"
+])
+
+print(results_df)
