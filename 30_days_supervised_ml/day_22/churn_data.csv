@@ -1,0 +1,16 @@
+CustomerID,Age,Gender,Tenure,MonthlyCharges,ContractType,InternetService,TechSupport,TotalCharges,Churn
+1,25,Male,12,50,Monthly,DSL,No,600,No
+2,45,Female,24,70,Yearly,Fiber,Yes,1680,No
+3,30,Male,6,80,Monthly,Fiber,No,480,Yes
+4,35,Female,18,60,Monthly,DSL,Yes,1080,No
+5,50,Male,2,90,Monthly,Fiber,No,180,Yes
+6,29,Female,36,55,Yearly,DSL,Yes,1980,No
+7,40,Male,8,75,Monthly,Fiber,No,600,Yes
+8,33,Female,20,65,Yearly,DSL,Yes,1300,No
+9,28,Male,4,85,Monthly,Fiber,No,340,Yes
+10,60,Female,48,50,Yearly,DSL,Yes,2400,No
+11,38,Male,10,70,Monthly,Fiber,No,700,Yes
+12,42,Female,30,60,Yearly,DSL,Yes,1800,No
+13,27,Male,5,95,Monthly,Fiber,No,475,Yes
+14,36,Female,22,65,Yearly,DSL,Yes,1430,No
+15,48,Male,3,85,Monthly,Fiber,No,255,Yes
