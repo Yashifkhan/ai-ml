@@ -1,53 +1,10 @@
+import joblib
 import pandas as pd
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+linear_regression_model = joblib.load('linear_regression_pipeline.pkl')
+decision_tree_model = joblib.load('decision_tree_pipeline.pkl')
+random_forest_model = joblib.load('random_forest_pipeline.pkl')
 
-df=pd.read_csv("students_final_raw (1).csv")
-
-# remove the column which is not need 
-uselesscolumns=["Math_marks", "Science_marks", "Social_Science_marks", "English_marks", "Hindi_marks","Total_marks", "core_ability", "data_source","goout", "Dalc", "Walc",'Average_marks']
-
-X=df.drop(columns=uselesscolumns,axis=1)
-y=df["Average_marks"]
-
-
-# handle the Categorical Encoding 
-binary_cols = ['school', 'sex', 'address', 'famsize', 'Pstatus',
-               'schoolsup', 'famsup', 'paid', 'activities', 
-               'nursery', 'higher', 'internet', 'romantic']
-
-multi_cols = ['Mjob', 'Fjob', 'reason', 'guardian']
-
-numeric_cols = [col for col in X.columns if col not in binary_cols + multi_cols]
-
-
-# Step 2: ColumnTransformer banao
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('binary_enc', OneHotEncoder(drop='if_binary'), binary_cols),
-        ('multi_enc', OneHotEncoder(), multi_cols)
-    ],
-    remainder='passthrough'   # numeric columns ko as-is rakhega
-)
-
-X_transformed = preprocessor.fit_transform(X)
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X_transformed, y, 
-    test_size=0.2, 
-    random_state=42
-)
-
-# train the model 
-# first linear regression 
-
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-
+# Step 2: Naya student data banao (raw form, jaisa pehle banaya tha)
 sample_student = pd.DataFrame([{
     'school': 'GP',
     'sex': 'F',
@@ -79,16 +36,17 @@ sample_student = pd.DataFrame([{
     'sleep_hours': 7.0,
     'mobile_social_hours': 3.0,
     'Math_self_rating': 5,
-    'Science_self _rating': 4,
+    'Science_self_rating': 4,
     'Social_Science_self_rating': 3,
     'English_self_rating': 4,
     'Hindi_self_rating': 3
 }])
 
-print(sample_student.shape)
-print(sample_student.columns.tolist())
+# Step 3: Predict karo
+prediction_lr = linear_regression_model.predict(sample_student)
+prediction_dt = decision_tree_model.predict(sample_student)
+prediction_rf = random_forest_model.predict(sample_student)
 
-sample_transformed = preprocessor.transform(sample_student)
-prediction = model.predict(sample_transformed)
-
-print("Predicted Average Marks:", prediction[0])
+print("Predicted Average Marks Lr :", prediction_lr[0])
+print("Predicted Average Marks Dt :", prediction_dt[0])
+print("Predicted Average Marks Rf :", prediction_rf[0])
