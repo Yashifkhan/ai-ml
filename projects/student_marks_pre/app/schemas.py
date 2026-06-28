@@ -1,0 +1,37 @@
+from pydantic import BaseModel
+
+class StudentData(BaseModel):
+    school: str
+    sex: str
+    age: int
+    address: str
+    famsize: str
+    Pstatus: str
+    Medu: int
+    Fedu: int
+    Mjob: str
+    Fjob: str
+    reason: str
+    guardian: str
+    traveltime: int
+    studytime: int
+    failures: int
+    schoolsup: str
+    famsup: str
+    paid: str
+    activities: str
+    nursery: str
+    higher: str
+    internet: str
+    romantic: str
+    famrel: int
+    freetime: int
+    health: int
+    absences: int
+    sleep_hours: float
+    mobile_social_hours: float
+    Math_self_rating: int
+    Science_self_rating: int
+    Social_Science_self_rating: int
+    English_self_rating: int
+    Hindi_self_rating: int

@@ -10,8 +10,9 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import numpy as np
 
-df=pd.read_csv("students_final_raw (1).csv")
+df=pd.read_csv("../data/students_final_raw (1).csv")
 
+# print("data file logs",df.head())
 # remove the column which is not need 
 uselesscolumns=["Math_marks", "Science_marks", "Social_Science_marks", "English_marks", "Hindi_marks","Total_marks", "core_ability", "data_source","goout", "Dalc", "Walc",'Average_marks']
 
@@ -183,8 +184,8 @@ print("All 3 pipelines trained successfully!")
 
 import joblib
 
-joblib.dump(pipe_lr, 'linear_regression_pipeline.pkl')
-joblib.dump(pipe_dt, 'decision_tree_pipeline.pkl')
-joblib.dump(pipe_rf, 'random_forest_pipeline.pkl')
+# joblib.dump(pipe_lr, 'linear_regression_pipeline.pkl')
+# joblib.dump(pipe_dt, 'decision_tree_pipeline.pkl')
+# joblib.dump(pipe_rf, 'random_forest_pipeline.pkl')
 
 print("All 3 models dumped successfully!")
