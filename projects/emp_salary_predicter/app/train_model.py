@@ -77,16 +77,16 @@ df=pd.read_csv("../data/survey_results_public.csv")
 # print(unique_db)
 
 
-db_skills = df["Country"]
-db_column = db_skills.dropna()
-all_db = db_column.str.split(";")
-flat_skills = [skill for sublist in all_db for skill in sublist]
-unique_db = set(flat_skills)
-print("Total unique db  skills:", len(unique_db))
-print(unique_db)
+# db_skills = df["Country"]
+# db_column = db_skills.dropna()
+# all_db = db_column.str.split(";")
+# flat_skills = [skill for sublist in all_db for skill in sublist]
+# unique_db = set(flat_skills)
+# print("Total unique db  skills:", len(unique_db))
+# print(unique_db)
 
 
-
+# print("data filter proper for the ui filters ")
 
 # print(df.columns)
 # print(df.head())
