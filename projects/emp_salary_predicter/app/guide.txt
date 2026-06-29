@@ -1,0 +1,37 @@
+this are the skills user select in which 
+Total unique skills: 51
+{'Raku', 'Lua', 'Delphi', 'TypeScript', 'JavaScript', 'C++', 'Swift', 'Nim', 'SQL', 'Fortran', 'APL', 'Ada', 'Java', 'Visual Basic (.Net)', 'Julia', 'Objective-C', 'F#', 'MATLAB', 'Zig', 'Clojure', 'Solidity', 'Crystal', 'C#', 'VBA', 'Bash/Shell (all shells)', 'Lisp', 'Cobol', 'SAS', 'R', 'Assembly', 'Apex', 'Kotlin', 'HTML/CSS', 'Flow', 'PowerShell', 'Scala', 'GDScript', 'OCaml', 'Dart', 'Ruby', 'Groovy', 'Rust', 'C', 'Python', 'PHP', 'Haskell', 'Perl', 'Erlang', 'Go', 'Prolog', 'Elixir'}
+
+
+this are the db skills user select in which 
+Total unique skills: 32
+{'Neo4J', 'Oracle', 'Snowflake', 'Cloud Firestore', 'Couch DB', 'Cosmos DB', 'Datomic', 'Microsoft Access', 'InfluxDB', 'SQLite', 'RavenDB', 'IBM DB2', 'MongoDB', 'Dynamodb', 'Solr', 'Firebird', 'Supabase', 'H2', 'Microsoft SQL Server', 'TiDB', 'Firebase Realtime Database', 'Elasticsearch', 'PostgreSQL', 'Couchbase', 'Redis', 'MariaDB', 'Cockroachdb', 'Clickhouse', 'DuckDB', 'MySQL', 'BigQuery', 'Cassandra'}
+
+
+Total unique PlatformHaveWorkedWith skills: 23
+{'Oracle Cloud Infrastructure (OCI)', 'IBM Cloud Or Watson', 'Digital Ocean', 'Netlify', 'Heroku', 'Firebase', 'Cloudflare', 'OpenStack', 'Amazon Web Services (AWS)', 'Linode, now Akamai', 'Google Cloud', 'Render', 'VMware', 'Vultr', 'Colocation', 'Microsoft Azure', 'Scaleway', 'Managed Hosting', 'Hetzner', 'OpenShift', 'Fly.io', 'OVH', 'Vercel'}
+
+
+print the all uniqe WebframeHaveWorkedWith
+Total unique db  skills: 34
+{'Elm', 'Laravel', 'ASP.NET CORE', 'jQuery', 'Next.js', 'NestJS', 'Lit', 'Angular', 'Blazor', 'AngularJS', 'ASP.NET', 'Qwik', 'Symfony', 'Phoenix', 'Node.js', 'Drupal', 'Vue.js', 'Fastify', 'Solid.js', 'React', 'Express', 'Nuxt.js', 'Spring Boot', 'Django', 'Remix', 'Gatsby', 'Svelte', 'Deno', 'Play Framework', 'CodeIgniter', 'Flask', 'WordPress', 'Ruby on Rails', 'FastAPI'}
+
+print the all uniqe ToolsTechHaveWorkedWith
+Total unique db  skills: 55
+{'Cargo', 'Homebrew', 'NuGet', 'Podman', 'MSBuild', 'Make', 'MSVC', 'Puppet', 'Wasmer', 'Ninja', 'doctest', 'Visual Studio Solution', 'QMake', 'GNU GCC', 'Unity 3D', 'Vite', 'Composer', 'Maven (build tool)', 'build2', 'Nix', 'APT', 'Pulumi', 'Docker', 'Pip', 'liblittletest', 'Boost.Test', "LLVM's Clang", 'pnpm', 'ELFspy', 'cppunit', 'Pacman', 'Godot', 'CUTE', 'Chocolatey', 'Chef', 'Unreal Engine', 'Google Test', 'Dagger', 'bandit', 'npm', 'Gradle', 'Catch2', 'Ant', 'Meson', 'Bun', 'Webpack', 'tunit', 'Terraform', 'SCons', 'snitch', 'Ansible', 'lest', 'CMake', 'Kubernetes', 'Yarn'}
+
+Total unique deggres skills: 8
+{'Professional degree (JD, MD, Ph.D, Ed.D, etc.)', 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Master’s degree (M.A., M.S., M.Eng., MBA, etc.)', 'Primary/elementary school', 'Something else', 'Some college/university study without earning a degree', 'Associate degree (A.A., A.S., etc.)', 'Bachelor’s degree (B.A., B.S., B.Eng., etc.)'}
+
+Total unique devtype  skills: 33
+{'Product manager', 'Other (please specify):', 'Developer, front-end', 'Cloud infrastructure engineer', 'Developer, desktop or enterprise applications', 'DevOps specialist', 'Marketing or sales professional', 'Senior Executive (C-Suite, VP, etc.)', 'Developer, game or graphics', 'Engineer, site reliability', 'Project manager', 'Developer, embedded applications or devices', 'Engineering manager', 'Developer, mobile', 'Educator', 'Database administrator', 'Hardware Engineer', 'Research& Development role', 'Student', 'Developer Advocate', 'Security professional', 'Data scientist or machine learning specialist', 'Data or business analyst', 'Blockchain', 'Developer, full-stack', 'Academic researcher', 'Engineer, data', 'Developer, back-end', 'System administrator', 'Developer, QA or test', 'Designer', 'Scientist', 'Developer Experience'}
+
+Total unique eprince years skills: 52
+{'38', '28', '18', '16', '17', '19', '40', '29', '1', '20', '48', '30', '25', '47', '35', '8', '37', 'More than 50 years', '5', '15', '13', '42', '4', '9', '12', '2', '44', 'Less than 1 year', '7', '24', '3', '14', '36', '22', '34', '41', '43', '26', '23', '33', '50', '27', '32', '11', '31', '6', '10', '45', '39', '49', '21', '46'}
+
+Total unique db  skills: 10
+{'10,000 or more employees', 'I don’t know', 'Just me - I am a freelancer, sole proprietor, etc.', '5,000 to 9,999 employees', '20 to 99 employees', '500 to 999 employees', '100 to 499 employees', '1,000 to 4,999 employees', '10 to 19 employees', '2 to 9 employees'}
+
+
+Total unique db  skills: 185
+{'Russian Federation', 'Ghana', 'Armenia', 'Spain', 'South Africa', 'Georgia', "Lao People's Democratic Republic", 'Dominican Republic', 'Rwanda', 'Mongolia', 'Guinea', 'Cape Verde', 'Guinea-Bissau', 'Antigua and Barbuda', 'Colombia', 'Jordan', 'Angola', 'Mexico', 'Cambodia', 'Philippines', 'Haiti', 'Palestine', 'Nomadic', 'Germany', 'Singapore', 'Paraguay', 'Indonesia', 'Andorra', 'Panama', 'Saint Vincent and the Grenadines', 'Myanmar', 'Iran, Islamic Republic of...', 'Nicaragua', 'Bhutan', 'North Korea', 'Saint Lucia', 'Central African Republic', 'San Marino', 'Libyan Arab Jamahiriya', 'Hungary', 'France', 'Mali', 'Kazakhstan', 'Kyrgyzstan','Republic of Moldova', 'Palau', 'Liechtenstein', 'Czech Republic', 'Brazil', 'Qatar', 'Cuba', 'Sierra Leone', 'Mauritania', 'Ireland', 'Syrian Arab Republic', 'Venezuela, Bolivarian Republic of...', 'Jamaica', 'Fiji', 'Timor-Leste', 'Gabon', 'Sri Lanka', 'Thailand', 'Iraq', 'Sudan', 'Monaco', 'Iceland', 'Portugal', 'Slovakia', 'Trinidad and Tobago', 'Switzerland', "Côte d'Ivoire", 'Cyprus', 'Samoa', 'Ukraine', 'Sweden', 'Tajikistan', 'Montenegro', 'Burkina Faso', 'Liberia', 'Australia', 'Swaziland', 'Uganda', 'Uruguay', 'Senegal', 'Niger', 'Pakistan', 'Lithuania', 'Peru', 'Belize', 'Turkmenistan', 'Belarus', 'Netherlands', 'Afghanistan', 'Algeria', 'Lebanon', 'Finland', 'Egypt', 'Benin', 'Albania', 'Malaysia', 'United Arab Emirates', 'Isle of Man', 'Morocco', 'Kenya', 'Honduras', 'Malta', 'Malawi', 'Kosovo', 'Burundi', 'Costa Rica', 'Nigeria', 'Ecuador', 'Barbados', 'Slovenia', 'Nepal', 'South Korea', 'Mozambique', 'Italy', 'Estonia', 'Turkey', 'Mauritius', 'Djibouti', 'Saudi Arabia', 'Bangladesh', 'Tunisia', 'El Salvador', 'Azerbaijan', 'Croatia', 'Greece', 'Bosnia and Herzegovina', 'Zimbabwe', 'United Republic of Tanzania', 'Republic of Korea', 'Hong Kong (S.A.R.)', 'Botswana', 'Namibia', 'Serbia', 'Cameroon', 'Latvia', 'Marshall Islands', 'Denmark', 'Poland', 'Bolivia', 'Taiwan','India', 'Romania', 'Maldives', 'Luxembourg', 'Viet Nam', 'Israel', 'Democratic Republic of the Congo', 'Bahamas', 'Zambia', 'Congo, Republic of the...', 'Chile','Brunei Darussalam', 'Belgium', 'Madagascar', 'Togo', 'Oman', 'Kuwait', 'Canada', 'New Zealand', 'Ethiopia', 'Bahrain', 'United States of America', 'Argentina', 'Grenada', 'Norway', 'Lesotho', 'China', 'United Kingdom of Great Britain and Northern Ireland', 'Austria', 'The former Yugoslav Republic of Macedonia', 'Saint Kitts and Nevis', 'Somalia', 'Guyana', 'Yemen', 'Uzbekistan', 'Bulgaria', 'Guatemala', 'Suriname', 'Japan', 'Dominica', "Democratic People's Republic of Korea"}
