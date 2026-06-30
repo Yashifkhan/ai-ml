@@ -1,3 +1,86 @@
+
+project use this features and train model on this data 
+total we have the 13 column 
+12 for tain the model and 1 is the target column  
+features = [
+
+    # Experience
+    {
+        "name": "YearsCodePro",
+        "heading": "Professional Coding Experience (Years)",
+        "meaning": "Number of years user has worked as a professional developer"
+    },
+    {
+        "name": "WorkExp",
+        "heading": "Total Work Experience (Years)",
+        "meaning": "Total years of work experience in any job"
+    },
+
+    # Education
+    {
+        "name": "EdLevel",
+        "heading": "Highest Education Level",
+        "meaning": "User's highest completed education qualification"
+    },
+
+    # Job Info
+    {
+        "name": "DevType",
+        "heading": "Current Job Role",
+        "meaning": "Type of developer role (Backend, Frontend, Fullstack, etc.)"
+    },
+    {
+        "name": "OrgSize",
+        "heading": "Company Size",
+        "meaning": "Size of the company where user works"
+    },
+    {
+        "name": "Industry",
+        "heading": "Company Industry",
+        "meaning": "Domain of the company (FinTech, Healthcare, etc.)"
+    },
+    {
+        "name": "RemoteWork",
+        "heading": "Work Mode",
+        "meaning": "Whether user works Remote, Hybrid, or On-site"
+    },
+
+    # Location
+    {
+        "name": "Country",
+        "heading": "Country of Employment",
+        "meaning": "Country where the user is working"
+    },
+
+    # Skills
+    {
+        "name": "LanguageHaveWorkedWith",
+        "heading": "Programming Languages Known",
+        "meaning": "Languages the user has experience with (Python, Java, etc.)"
+    },
+    {
+        "name": "PlatformHaveWorkedWith",
+        "heading": "Platforms & Cloud Technologies",
+        "meaning": "Platforms like AWS, Azure, Docker, Kubernetes"
+    },
+    {
+        "name": "DatabaseHaveWorkedWith",
+        "heading": "Databases Known",
+        "meaning": "Databases like MySQL, MongoDB, PostgreSQL"
+    },
+    {
+        "name": "ToolsTechHaveWorkedWith",
+        "heading": "Development Tools Used",
+        "meaning": "Tools like Git, VS Code, Jenkins, Postman"
+    },
+    {
+        "name": "ConvertedCompYearly",
+        "heading": "",
+        "meaning": ""
+    }
+
+]
+
 this are the skills user select in which 
 Total unique skills: 51
 {'Raku', 'Lua', 'Delphi', 'TypeScript', 'JavaScript', 'C++', 'Swift', 'Nim', 'SQL', 'Fortran', 'APL', 'Ada', 'Java', 'Visual Basic (.Net)', 'Julia', 'Objective-C', 'F#', 'MATLAB', 'Zig', 'Clojure', 'Solidity', 'Crystal', 'C#', 'VBA', 'Bash/Shell (all shells)', 'Lisp', 'Cobol', 'SAS', 'R', 'Assembly', 'Apex', 'Kotlin', 'HTML/CSS', 'Flow', 'PowerShell', 'Scala', 'GDScript', 'OCaml', 'Dart', 'Ruby', 'Groovy', 'Rust', 'C', 'Python', 'PHP', 'Haskell', 'Perl', 'Erlang', 'Go', 'Prolog', 'Elixir'}
