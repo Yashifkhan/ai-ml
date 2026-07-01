@@ -164,13 +164,120 @@ for col in result['categorical']:
 for col in result['multi_value']:
     df[col] = df[col].fillna("")
 
-# Target
-df = df[df['ConvertedCompYearly'].notna()]
-df.drop_duplicates()
 
-# print(required_features)
-print(df[required_features])
-print(df[required_features].isnull().sum())
-# print(df[requred_features])
-# print(required_features)
-# print(len(required_features))
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import MultiLabelBinarizer
+class MultiValueEncoder(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+        self.mlbs = {}
+
+    def fit(self, X, y=None):
+        for col in self.columns:
+            mlb = MultiLabelBinarizer()
+            mlb.fit(X[col].fillna('').str.split(';'))
+            self.mlbs[col] = mlb
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        all_encoded = []
+
+        for col in self.columns:
+            mlb = self.mlbs[col]
+            split_data = X[col].fillna('').str.split(';')
+
+            encoded = pd.DataFrame(
+                mlb.transform(split_data),
+                columns=[f"{col}_{c}" for c in mlb.classes_],
+                index=X.index
+            )
+
+            all_encoded.append(encoded)
+
+        # Drop original columns
+        X = X.drop(columns=self.columns)
+
+        # Combine all
+        X = pd.concat([X] + all_encoded, axis=1)
+
+        return X
+
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+# Column groups
+num_cols = result['numerical']
+cat_cols = result['categorical']
+multi_cols = result['multi_value']
+
+# Pipeline
+pipeline = Pipeline(steps=[
+    # Step 1: Multi-value encoding
+    ("multi", MultiValueEncoder(columns=multi_cols)),
+    # Step 2: ColumnTransformer
+    ("preprocess", ColumnTransformer(
+        transformers=[
+            ("num", StandardScaler(), num_cols),
+            ("cat", OneHotEncoder(handle_unknown='ignore'), cat_cols)
+        ],
+        remainder='passthrough'  # keeps multi-value encoded columns
+    ))
+])
+
+df = df[df['ConvertedCompYearly'].notna()].copy()
+df = df.drop_duplicates()
+
+df_model = df[required_features].copy()
+
+X = df_model.drop('ConvertedCompYearly', axis=1)
+y = df_model['ConvertedCompYearly']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+X_train_transformed = pipeline.fit_transform(X_train)
+X_test_transformed = pipeline.transform(X_test)
+
+# train the model  
+linear_pipeline = Pipeline(steps=[
+    
+    ("multi", MultiValueEncoder(columns=multi_cols)),
+    
+    ("preprocess", ColumnTransformer(
+        transformers=[
+            ("num", StandardScaler(), num_cols),
+            ("cat", OneHotEncoder(handle_unknown='ignore'), cat_cols)
+        ],
+        remainder='passthrough'
+    )),
+    
+    ("model", LinearRegression())
+])
+# linear_pipeline.fit(X_train, y_train)
+# y_pred = linear_pipeline.predict(X_test)
+# print(y_pred)
+# mae = mean_absolute_error(y_test, y_pred)
+# rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+# r2 = r2_score(y_test, y_pred)
+
+# print(min(y_pred), max(y_pred))
+
+# print("Linear Regression Results:")
+# print("MAE:", mae)
+# print("RMSE:", rmse)
+# print("R2 Score:", r2)
+
+print(y.sort_values(ascending=False).head(10))
+
+# plt.hist(y, bins=50)
+# plt.title("Salary Distribution")
+# # plt.show()
+# plt.show()

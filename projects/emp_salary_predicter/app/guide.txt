@@ -2,6 +2,13 @@
 project use this features and train model on this data 
 total we have the 13 column 
 12 for tain the model and 1 is the target column  
+in this data hai 89k row 
+but the ConvertedCompYearly 46k row are missing data 
+so we direct drop it becuse
+
+supervised learning me agar target hi missing hai, wo row training ke kaam ki nahi (kyunki model ko sikhne ke liye label chahiye). Isliye sabse pehla aur sabse important step hoga: target-missing rows ko drop karna
+
+
 features = [
 
     # Experience
