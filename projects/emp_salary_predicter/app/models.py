@@ -108,11 +108,61 @@ df_step2_clean["OrgSize_encoded"] = df_step2_clean["OrgSize"].map(orgsize_order)
 df_step2_clean = df_step2_clean.copy()
 
 df_step2_clean = pd.get_dummies(df_step2_clean, columns=["RemoteWork", "Industry"], prefix=["Remote", "Industry"])
+top_devtype = df_step2_clean["DevType"].value_counts().nlargest(14).index
+df_step2_clean["DevType_grouped"] = df_step2_clean["DevType"].apply(
+    lambda x: x if x in top_devtype else "Other"
+)
+
+# Country bucketing
+top_country = df_step2_clean["Country"].value_counts().nlargest(25).index
+df_step2_clean["Country_grouped"] = df_step2_clean["Country"].apply(
+    lambda x: x if x in top_country else "Other"
+)
+
+df_step2_clean = pd.get_dummies(
+    df_step2_clean,
+    columns=["DevType_grouped", "Country_grouped"],
+    prefix=["Dev", "Ctry"]
+)
 
 print("New shape:", df_step2_clean.shape)
-print("\nNew columns added:\n", [col for col in df_step2_clean.columns if col.startswith("Remote_") or col.startswith("Industry_")])
 
+cols_to_drop = ["EdLevel", "OrgSize", "DevType", "Country"]
+df_step2_clean = df_step2_clean.drop(columns=cols_to_drop)
 
+multilabel_cols = ["LanguageHaveWorkedWith", "PlatformHaveWorkedWith", "DatabaseHaveWorkedWith", "ToolsTechHaveWorkedWith"]
+
+def multihot_encode(df, col, top_n, prefix):
+    top_skills = df[col].dropna().str.split(";").explode().value_counts().nlargest(top_n).index.tolist()
+    
+    for skill in top_skills:
+        # Clean column name (remove special chars for safety)
+        safe_name = skill.replace(" ", "_").replace("/", "_").replace("(", "").replace(")", "").replace(",", "")
+        df[f"{prefix}_{safe_name}"] = df[col].apply(
+            lambda x: 1 if pd.notna(x) and skill in x.split(";") else 0
+        )
+    return df
+
+df_step2_clean = multihot_encode(df_step2_clean, "LanguageHaveWorkedWith", 15, "Lang")
+df_step2_clean = multihot_encode(df_step2_clean, "PlatformHaveWorkedWith", 12, "Plat")
+df_step2_clean = multihot_encode(df_step2_clean, "DatabaseHaveWorkedWith", 12, "DB")
+df_step2_clean = multihot_encode(df_step2_clean, "ToolsTechHaveWorkedWith", 15, "Tool")
+cols_to_drop = ["LanguageHaveWorkedWith", "PlatformHaveWorkedWith", "DatabaseHaveWorkedWith", "ToolsTechHaveWorkedWith"]
+df_step2_clean = df_step2_clean.drop(columns=cols_to_drop)
+
+# Step 6.1: Missing values check
+print("Missing values in features:", df_step2_clean.isnull().sum().sum())
+
+# Step 6.2: Data types check
+print("Dtypes unique:", df_step2_clean.dtypes.unique())
+
+# Step 6.3: Target distribution
+print("\nTarget stats:\n", df_step2_clean["ConvertedCompYearly"].describe())
+
+# Step 6.4: Shape final
+print("\nFinal shape:", df_step2_clean.shape)
+print("Total rows:", df_step2_clean.shape[0])
+print("Total features:", df_step2_clean.shape[1] - 1)  # -1 kyunki target ek column hai
 # print("\nSelected shape:", df_selected.shape)
 # print("\nDtypes:\n", df_selected.dtypes)
 # print("\nMissing value % per column:\n", (df_selected.isnull().mean()*100).round(2))
