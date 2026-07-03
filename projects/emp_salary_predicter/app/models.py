@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 df=pd.read_csv("../data/survey_results_public.csv")
 # get the requred feature 
@@ -125,7 +127,7 @@ df_step2_clean = pd.get_dummies(
     prefix=["Dev", "Ctry"]
 )
 
-print("New shape:", df_step2_clean.shape)
+# print("New shape:", df_step2_clean.shape)
 
 cols_to_drop = ["EdLevel", "OrgSize", "DevType", "Country"]
 df_step2_clean = df_step2_clean.drop(columns=cols_to_drop)
@@ -143,26 +145,31 @@ def multihot_encode(df, col, top_n, prefix):
         )
     return df
 
-df_step2_clean = multihot_encode(df_step2_clean, "LanguageHaveWorkedWith", 15, "Lang")
-df_step2_clean = multihot_encode(df_step2_clean, "PlatformHaveWorkedWith", 12, "Plat")
-df_step2_clean = multihot_encode(df_step2_clean, "DatabaseHaveWorkedWith", 12, "DB")
-df_step2_clean = multihot_encode(df_step2_clean, "ToolsTechHaveWorkedWith", 15, "Tool")
-cols_to_drop = ["LanguageHaveWorkedWith", "PlatformHaveWorkedWith", "DatabaseHaveWorkedWith", "ToolsTechHaveWorkedWith"]
-df_step2_clean = df_step2_clean.drop(columns=cols_to_drop)
+# df_step2_clean = multihot_encode(df_step2_clean, "LanguageHaveWorkedWith", 15, "Lang")
+# df_step2_clean = multihot_encode(df_step2_clean, "PlatformHaveWorkedWith", 12, "Plat")
+# df_step2_clean = multihot_encode(df_step2_clean, "DatabaseHaveWorkedWith", 12, "DB")
+# df_step2_clean = multihot_encode(df_step2_clean, "ToolsTechHaveWorkedWith", 15, "Tool")
+# cols_to_drop = ["LanguageHaveWorkedWith", "PlatformHaveWorkedWith", "DatabaseHaveWorkedWith", "ToolsTechHaveWorkedWith"]
+# df_step2_clean = df_step2_clean.drop(columns=cols_to_drop)
 
 # Step 6.1: Missing values check
-print("Missing values in features:", df_step2_clean.isnull().sum().sum())
+# print("Missing values in features:", df_step2_clean.isnull().sum().sum())
 
 # Step 6.2: Data types check
-print("Dtypes unique:", df_step2_clean.dtypes.unique())
+# print("Dtypes unique:", df_step2_clean.dtypes.unique())
 
 # Step 6.3: Target distribution
-print("\nTarget stats:\n", df_step2_clean["ConvertedCompYearly"].describe())
+# print("\nTarget stats:\n", df_step2_clean["ConvertedCompYearly"].describe())
 
 # Step 6.4: Shape final
-print("\nFinal shape:", df_step2_clean.shape)
-print("Total rows:", df_step2_clean.shape[0])
-print("Total features:", df_step2_clean.shape[1] - 1)  # -1 kyunki target ek column hai
+# print("\nFinal shape:", df_step2_clean.shape)
+# print("Total rows:", df_step2_clean.shape[0])
+# print("Total features:", df_step2_clean.shape[1] - 1)  # -1 kyunki target ek column hai
 # print("\nSelected shape:", df_selected.shape)
 # print("\nDtypes:\n", df_selected.dtypes)
 # print("\nMissing value % per column:\n", (df_selected.isnull().mean()*100).round(2))
+
+
+
+sns.boxenplot(df["ConvertedCompYearly"])
+plt.show()
