@@ -96,6 +96,8 @@ Total unique skills: 51
 this are the db skills user select in which 
 Total unique skills: 32
 {'Neo4J', 'Oracle', 'Snowflake', 'Cloud Firestore', 'Couch DB', 'Cosmos DB', 'Datomic', 'Microsoft Access', 'InfluxDB', 'SQLite', 'RavenDB', 'IBM DB2', 'MongoDB', 'Dynamodb', 'Solr', 'Firebird', 'Supabase', 'H2', 'Microsoft SQL Server', 'TiDB', 'Firebase Realtime Database', 'Elasticsearch', 'PostgreSQL', 'Couchbase', 'Redis', 'MariaDB', 'Cockroachdb', 'Clickhouse', 'DuckDB', 'MySQL', 'BigQuery', 'Cassandra'}
+use only this : New columns: ['db_PostgreSQL', 'db_MySQL', 'db_SQLite', 'db_Microsoft_SQL_Server', 'db_Redis', 'db_MongoDB', 'db_MariaDB', 'db_Elasticsearch', 'db_Dynamodb', 'db_Oracle']
+
 
 
 Total unique PlatformHaveWorkedWith skills: 23
