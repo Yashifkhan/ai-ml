@@ -8,7 +8,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score
 
 
-df=pd.read_csv("../data/SalaryData.csv")
+# df=pd.read_csv("../data/SalaryData.csv")
+
+df=pd.read_csv("../data/survey_results_public.csv")
+print(df["RemoteWork"])
 
 num_features=["experience_years","skills_count","salary","certifications"]
 cat_features=["job_title","education_level","industry","company_size","location","remote_work"]
@@ -42,16 +45,16 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-scaler = StandardScaler()
+# scaler = StandardScaler()
 
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
+# X_train = scaler.fit_transform(X_train)
+# X_test = scaler.transform(X_test)
 
-model = LinearRegression()
-model.fit(X_train, y_train)
+# model = LinearRegression()
+# model.fit(X_train, y_train)
 
-y_pred = model.predict(X_test)
+# y_pred = model.predict(X_test)
 
-print("MAE:", mean_absolute_error(y_test, y_pred))
-print("R2 Score:", r2_score(y_test, y_pred))
-# print(df.isnull().sum())
+# print("MAE:", mean_absolute_error(y_test, y_pred))
+# print("R2 Score:", r2_score(y_test, y_pred))
+# # print(df.isnull().sum())

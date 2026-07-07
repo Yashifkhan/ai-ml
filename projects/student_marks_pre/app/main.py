@@ -18,8 +18,9 @@ models=load_models()
 @app.get("/")
 def home():
     return {"message": "Student Mark predicter api App run"}
-@app.get("/test-model")
 
+
+@app.get("/test-model")
 def test_model():
     return {"models_loaded": list(models.keys())}
 
