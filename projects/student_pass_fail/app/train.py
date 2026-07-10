@@ -78,6 +78,8 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, stratify=y, random_state=42
 )
 
+print(X.columns)
+
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
@@ -96,7 +98,7 @@ y_pred_rf = rf_model.predict(X_test)
 # create path
 model_dir = os.path.join("..", "models")
 # save models
-joblib.dump(log_model, os.path.join(model_dir, "logistic_model.pkl"))
-joblib.dump(rf_model, os.path.join(model_dir, "rf_model.pkl"))
-joblib.dump(scaler, os.path.join(model_dir, "scaler.pkl"))
+# joblib.dump(log_model, os.path.join(model_dir, "logistic_model.pkl"))
+# joblib.dump(rf_model, os.path.join(model_dir, "rf_model.pkl"))
+# joblib.dump(scaler, os.path.join(model_dir, "scaler.pkl"))
 
