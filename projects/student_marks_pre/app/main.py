@@ -15,7 +15,7 @@ app.add_middleware(
 )
 # load the ,models 
 models=load_models()
-@app.get("/")
+@app.get("/model-test")
 def home():
     return {"message": "Student Mark predicter api App run"}
 
