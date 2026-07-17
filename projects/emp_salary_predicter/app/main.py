@@ -7,6 +7,7 @@ from app.pipeline import DeveloperSalaryPipeline
 
 app = FastAPI()
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,9 +16,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 model = load_model()   # 👈 yahan explicitly call kar rahe hain
 
-@app.get("/")
+@app.get("/model-test")
 def home():
     return {"message": "Salary Prediction API is running 🚀"}
 
